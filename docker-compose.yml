@@ -1,0 +1,44 @@
+services:
+
+  php-apache:
+    restart: unless-stopped
+    container_name: php-apache
+    build:
+      context: ./
+    volumes:
+      - ./root:/root/
+      - ./var-www-html:/var/www/html/
+      - ./var-log-apache2:/var/log/apache2/
+    ports:
+      - "8080:80"
+
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    restart: unless-stopped
+    environment:
+      TZ: Asia/Bangkok
+      MARIADB_ROOT_PASSWORD: ${MARIADB_PASSWORD}
+    volumes:
+      - ./var-lib-mysql:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin
+    restart: unless-stopped
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mariadb
+    depends_on:
+      - mariadb
+
+  npm:
+    image: 'docker.io/jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    volumes:
+      - ./npm-data:/data
+      - ./npm-letsencrypt:/etc/letsencrypt

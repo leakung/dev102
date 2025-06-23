@@ -1,0 +1,7 @@
+.env
+npm-data/
+npm-letsencrypt/
+root/
+var-lib-mysql/
+var-log-apache2/
+var-www-html/
