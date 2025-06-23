@@ -6,6 +6,6 @@
 copy env.example to .env<br>
 MARIADB_PASSWORD=XXX<br>
 <br>
-Cloudflare : Public hostnames<br>
-http://nginx<br>
-http://phpmyadmin<br>
+Nginx Proxy Manager : Forward Hostname<br>
+php-apache<br>
+phpmyadmin<br>
