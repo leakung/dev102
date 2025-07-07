@@ -28,12 +28,8 @@ RUN apt update && apt install -y \
     libzip-dev \
     zip \
     vim \
-    && docker-php-ext-install \
-    intl \
-    zip \
-    pdo_mysql \
-    mysqli \
-    gd
+    bind9utils \
+    dnsutils
 
 # Install PHP extensions
 RUN docker-php-ext-install \
